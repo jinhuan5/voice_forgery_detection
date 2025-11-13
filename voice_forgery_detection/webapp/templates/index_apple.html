@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语音伪造检测 - Apple风格</title>
+    <style>
+        /* Apple设计系统变量 */
+        :root {
+            /* 颜色系统 - Apple风格 */
+            --apple-blue: #007AFF;
+            --apple-blue-dark: #0051D5;
+            --apple-gray-100: #F2F2F7;
+            --apple-gray-200: #E5E5EA;
+            --apple-gray-300: #D1D1D6;
+            --apple-gray-400: #C7C7CC;
+            --apple-gray-500: #AEAEB2;
+            --apple-gray-600: #8E8E93;
+            --apple-gray-700: #636366;
+            --apple-gray-800: #48484A;
+            --apple-gray-900: #1C1C1E;
+            --apple-white: #FFFFFF;
+            --apple-black: #000000;
+            --apple-green: #34C759;
+            --apple-red: #FF3B30;
+            --apple-orange: #FF9500;
+            --apple-yellow: #FFCC00;
+
+            /* 间距系统 */
+            --apple-space-xs: 4px;
+            --apple-space-sm: 8px;
+            --apple-space-md: 16px;
+            --apple-space-lg: 24px;
+            --apple-space-xl: 32px;
+            --apple-space-2xl: 48px;
+            --apple-space-3xl: 64px;
+
+            /* 字体系统 */
+            --apple-font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            --apple-font-size-xs: 12px;
+            --apple-font-size-sm: 14px;
+            --apple-font-size-md: 16px;
+            --apple-font-size-lg: 20px;
+            --apple-font-size-xl: 24px;
+            --apple-font-size-2xl: 32px;
+            --apple-font-size-3xl: 48px;
+
+            /* 圆角系统 */
+            --apple-radius-sm: 8px;
+            --apple-radius-md: 12px;
+            --apple-radius-lg: 16px;
+            --apple-radius-xl: 20px;
+            --apple-radius-2xl: 24px;
+
+            /* 阴影系统 */
+            --apple-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --apple-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --apple-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+
+            /* 动画 */
+            --apple-transition-fast: 0.2s ease;
+            --apple-transition-normal: 0.3s ease;
+            --apple-transition-slow: 0.5s ease;
+        }
+
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--apple-font-system);
+            font-size: var(--apple-font-size-md);
+            line-height: 1.5;
+            color: var(--apple-gray-900);
+            background: linear-gradient(135deg, #F5F7FF 0%, #E6EAFF 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--apple-space-lg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 主容器 - Apple风格 */
+        .apple-container {
+            background: var(--apple-white);
+            border-radius: var(--apple-radius-2xl);
+            box-shadow: var(--apple-shadow-lg);
+            padding: var(--apple-space-3xl);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* 标题区域 */
+        .apple-header {
+            margin-bottom: var(--apple-space-3xl);
+            position: relative;
+        }
+
+        .apple-title {
+            font-size: var(--apple-font-size-3xl);
+            font-weight: 700;
+            color: var(--apple-gray-900);
+            margin-bottom: var(--apple-space-md);
+            line-height: 1.1;
+        }
+
+        .apple-subtitle {
+            font-size: var(--apple-font-size-lg);
+            color: var(--apple-gray-600);
+            font-weight: 400;
+            margin-bottom: var(--apple-space-sm);
+        }
+
+        .apple-description {
+            font-size: var(--apple-font-size-sm);
+            color: var(--apple-gray-500);
+            margin-bottom: var(--apple-space-lg);
+        }
+
+        /* 上传区域 - Apple风格 */
+        .apple-upload-card {
+            background: var(--apple-gray-100);
+            border: 2px dashed var(--apple-gray-300);
+            border-radius: var(--apple-radius-xl);
+            padding: var(--apple-space-3xl);
+            margin: var(--apple-space-2xl) 0;
+            transition: all var(--apple-transition-fast);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .apple-upload-card:hover {
+            border-color: var(--apple-blue);
+            background: rgba(0, 122, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--apple-shadow-md);
+        }
+
+        .apple-upload-card.dragover {
+            border-color: var(--apple-blue);
+            background: rgba(0, 122, 255, 0.1);
+            transform: scale(1.01);
+        }
+
+        .apple-upload-icon {
+            font-size: 64px;
+            color: var(--apple-blue);
+            margin-bottom: var(--apple-space-lg);
+            display: block;
+        }
+
+        .apple-upload-text {
+            font-size: var(--apple-font-size-lg);
+            color: var(--apple-gray-700);
+            margin-bottom: var(--apple-space-md);
+            font-weight: 600;
+        }
+
+        .apple-upload-hint {
+            font-size: var(--apple-font-size-sm);
+            color: var(--apple-gray-500);
+            margin-bottom: var(--apple-space-lg);
+        }
+
+        /* Apple风格按钮 */
+        .apple-btn {
+            background: var(--apple-blue);
+            color: var(--apple-white);
+            border: none;
+            padding: var(--apple-space-md) var(--apple-space-xl);
+            border-radius: var(--apple-radius-md);
+            font-size: var(--apple-font-size-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--apple-transition-fast);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--apple-space-sm);
+            min-height: 44px;
+            font-family: var(--apple-font-system);
+        }
+
+        .apple-btn:hover {
+            background: var(--apple-blue-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--apple-shadow-sm);
+        }
+
+        .apple-btn:active {
+            transform: translateY(0);
+        }
+
+        .apple-btn:disabled {
+            background: var(--apple-gray-300);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Apple风格输入框 */
+        .apple-file-input {
+            display: none;
+        }
+
+        /* 文件信息卡片 */
+        .apple-file-card {
+            background: var(--apple-gray-100);
+            border-radius: var(--apple-radius-lg);
+            padding: var(--apple-space-lg);
+            margin: var(--apple-space-lg) 0;
+            border-left: 4px solid var(--apple-blue);
+            text-align: left;
+        }
+
+        .apple-file-info {
+            font-size: var(--apple-font-size-sm);
+            color: var(--apple-gray-700);
+            margin-bottom: var(--apple-space-xs);
+        }
+
+        .apple-file-info:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Apple风格加载动画 */
+        .apple-loading {
+            display: none;
+            margin: var(--apple-space-2xl) 0;
+            text-align: center;
+        }
+
+        .apple-loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--apple-gray-200);
+            border-top: 3px solid var(--apple-blue);
+            border-radius: 50%;
+            animation: apple-spin 1s linear infinite;
+            margin: 0 auto var(--apple-space-md);
+        }
+
+        @keyframes apple-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .apple-loading-text {
+            font-size: var(--apple-font-size-md);
+            color: var(--apple-gray-600);
+        }
+
+        /* Apple风格结果区域 */
+        .apple-result-card {
+            margin-top: var(--apple-space-2xl);
+            padding: var(--apple-space-xl);
+            border-radius: var(--apple-radius-xl);
+            display: none;
+            text-align: left;
+            backdrop-filter: blur(10px);
+        }
+
+        .apple-result-real {
+            background: linear-gradient(135deg, var(--apple-green), #30A14E);
+            color: var(--apple-white);
+        }
+
+        .apple-result-fake {
+            background: linear-gradient(135deg, var(--apple-red), #D70015);
+            color: var(--apple-white);
+        }
+
+        .apple-result-error {
+            background: linear-gradient(135deg, var(--apple-orange), #CC4E00);
+            color: var(--apple-white);
+        }
+
+        .apple-result-title {
+            font-size: var(--apple-font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--apple-space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--apple-space-sm);
+        }
+
+        .apple-result-details {
+            font-size: var(--apple-font-size-md);
+            margin: var(--apple-space-sm) 0;
+            opacity: 0.95;
+        }
+
+        /* Apple风格置信度条 */
+        .apple-confidence-bar {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: var(--apple-radius-sm);
+            height: 8px;
+            margin: var(--apple-space-lg) 0;
+            overflow: hidden;
+        }
+
+        .apple-confidence-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--apple-radius-sm);
+            transition: width var(--apple-transition-slow);
+        }
+
+        /* Apple风格频谱图 */
+        .apple-spectrogram {
+            margin-top: var(--apple-space-xl);
+            text-align: center;
+        }
+
+        .apple-spectrogram-title {
+            font-size: var(--apple-font-size-lg);
+            font-weight: 600;
+            color: var(--apple-white);
+            margin-bottom: var(--apple-space-md);
+            opacity: 0.9;
+        }
+
+        .apple-spectrogram img {
+            max-width: 100%;
+            border-radius: var(--apple-radius-lg);
+            box-shadow: var(--apple-shadow-md);
+        }
+
+        /* Apple风格支持格式 */
+        .apple-info-section {
+            margin-top: var(--apple-space-2xl);
+            padding-top: var(--apple-space-xl);
+            border-top: 1px solid var(--apple-gray-200);
+        }
+
+        .apple-info-title {
+            font-size: var(--apple-font-size-sm);
+            font-weight: 600;
+            color: var(--apple-gray-700);
+            margin-bottom: var(--apple-space-sm);
+        }
+
+        .apple-info-text {
+            font-size: var(--apple-font-size-xs);
+            color: var(--apple-gray-500);
+            line-height: 1.6;
+        }
+
+        /* Apple风格页脚 */
+        .apple-footer {
+            margin-top: var(--apple-space-2xl);
+            padding-top: var(--apple-space-xl);
+            border-top: 1px solid var(--apple-gray-200);
+            text-align: center;
+        }
+
+        .apple-footer-text {
+            font-size: var(--apple-font-size-xs);
+            color: var(--apple-gray-500);
+            margin-bottom: var(--apple-space-xs);
+        }
+
+        .apple-footer-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 风格切换按钮 */
+        .apple-style-switch {
+            position: absolute;
+            top: var(--apple-space-lg);
+            right: var(--apple-space-lg);
+            background: var(--apple-gray-100);
+            color: var(--apple-gray-700);
+            border: 1px solid var(--apple-gray-300);
+            padding: var(--apple-space-sm) var(--apple-space-md);
+            border-radius: var(--apple-radius-md);
+            font-size: var(--apple-font-size-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--apple-transition-fast);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--apple-space-sm);
+        }
+
+        .apple-style-switch:hover {
+            background: var(--apple-gray-200);
+            border-color: var(--apple-gray-400);
+            transform: translateY(-1px);
+        }
+
+        .apple-footer-text {
+            font-size: var(--apple-font-size-xs);
+            color: var(--apple-gray-500);
+            margin-bottom: var(--apple-space-xs);
+        }
+
+        .apple-footer-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: var(--apple-space-md);
+            }
+
+            .apple-container {
+                padding: var(--apple-space-xl);
+                margin: var(--apple-space-sm);
+            }
+
+            .apple-title {
+                font-size: var(--apple-font-size-2xl);
+            }
+
+            .apple-upload-card {
+                padding: var(--apple-space-xl);
+            }
+
+            .apple-upload-icon {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .apple-container {
+                padding: var(--apple-space-lg);
+            }
+
+            .apple-title {
+                font-size: var(--apple-font-size-xl);
+            }
+
+            .apple-upload-card {
+                padding: var(--apple-space-lg);
+            }
+
+            .apple-upload-icon {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="apple-container">
+        <a href="/" class="apple-style-switch">返回原版</a>
+        <div class="apple-header">
+            <h1 class="apple-title">语音伪造检测</h1>
+            <p class="apple-subtitle">AI智能识别音频真伪</p>
+            <p class="apple-description">上传音频文件，快速检测是否为伪造语音</p>
+        </div>
+
+        <div class="apple-upload-card" id="uploadArea">
+            <div class="apple-upload-icon">🎵</div>
+            <div class="apple-upload-text">选择音频文件或拖拽到此处</div>
+            <div class="apple-upload-hint">支持 WAV、MP3、M4A、FLAC 格式</div>
+            <input type="file" id="fileInput" class="apple-file-input" accept=".wav,.mp3,.m4a,.flac">
+            <button class="apple-btn" onclick="document.getElementById('fileInput').click()">
+                选择文件
+            </button>
+        </div>
+
+        <div class="apple-file-card" id="fileInfo" style="display: none;">
+            <div class="apple-file-info" id="fileName"></div>
+            <div class="apple-file-info" id="fileSize"></div>
+        </div>
+
+        <div class="apple-loading" id="loading">
+            <div class="apple-loading-spinner"></div>
+            <div class="apple-loading-text">正在分析音频...</div>
+        </div>
+
+        <div class="apple-result-card" id="resultArea">
+            <div class="apple-result-title" id="resultTitle"></div>
+            <div class="apple-result-details" id="resultDetails"></div>
+            <div class="apple-confidence-bar">
+                <div class="apple-confidence-fill" id="confidenceFill"></div>
+            </div>
+            <div class="apple-spectrogram" id="spectrogram"></div>
+        </div>
+
+        <div class="apple-info-section">
+            <div class="apple-info-title">支持的格式</div>
+            <div class="apple-info-text">
+                WAV, MP3, M4A, FLAC<br>
+                文件大小限制：16MB以内
+            </div>
+        </div>
+
+        <div class="apple-footer">
+            <div class="apple-footer-text">🔬 基于机器学习的语音伪造检测技术</div>
+            <div class="apple-footer-text">使用MFCC特征和多种机器学习算法进行智能识别</div>
+        </div>
+    </div>
+
+    <script>
+        // Apple风格的JavaScript交互
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const loading = document.getElementById('loading');
+        const resultArea = document.getElementById('resultArea');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultDetails = document.getElementById('resultDetails');
+        const confidenceFill = document.getElementById('confidenceFill');
+        const spectrogram = document.getElementById('spectrogram');
+
+        // 文件拖拽功能
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        // 文件选择
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            // 检查文件类型
+            const allowedTypes = ['audio/wav', 'audio/mpeg', 'audio/mp4', 'audio/flac'];
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+            const allowedExtensions = ['wav', 'mp3', 'm4a', 'flac'];
+
+            if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension)) {
+                alert('不支持的文件格式！请选择WAV、MP3、M4A或FLAC文件。');
+                return;
+            }
+
+            // 检查文件大小
+            if (file.size > 16 * 1024 * 1024) {
+                alert('文件过大！请选择小于16MB的文件。');
+                return;
+            }
+
+            // 显示文件信息
+            document.getElementById('fileName').textContent = `文件名: ${file.name}`;
+            document.getElementById('fileSize').textContent = `文件大小: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+            fileInfo.style.display = 'block';
+
+            // 上传文件
+            uploadFile(file);
+        }
+
+        function uploadFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // 显示加载状态
+            loading.style.display = 'block';
+            resultArea.style.display = 'none';
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+
+                if (data.success) {
+                    displayResult(data.result, data.spectrogram);
+                } else {
+                    displayError(data.error);
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                displayError('上传失败: ' + error.message);
+            });
+        }
+
+        function displayResult(result, spectrogramData) {
+            resultArea.style.display = 'block';
+
+            if (result.error) {
+                displayError(result.error);
+                return;
+            }
+
+            const isFake = result.is_fake;
+            const confidence = result.confidence;
+            const probReal = result.real_probability;
+            const probFake = result.fake_probability;
+
+            // 设置结果样式和内容
+            resultArea.className = 'apple-result-card ' + (isFake ? 'apple-result-fake' : 'apple-result-real');
+
+            resultTitle.innerHTML = isFake ?
+                '<span>⚠️</span>检测到伪造语音' :
+                '<span>✓</span>真实语音';
+
+            resultDetails.innerHTML = `
+                <div>真实概率: ${(probReal * 100).toFixed(1)}%</div>
+                <div>伪造概率: ${(probFake * 100).toFixed(1)}%</div>
+            `;
+
+            // 设置置信度条
+            confidenceFill.style.width = (confidence * 100) + '%';
+
+            // 显示频谱图
+            if (spectrogramData) {
+                spectrogram.innerHTML = `
+                    <div class="apple-spectrogram-title">音频频谱分析</div>
+                    <img src="data:image/png;base64,${spectrogramData}" alt="频谱图">
+                `;
+            }
+        }
+
+        function displayError(error) {
+            resultArea.style.display = 'block';
+            resultArea.className = 'apple-result-card apple-result-error';
+            resultTitle.innerHTML = '<span>✗</span>检测失败';
+            resultDetails.textContent = error;
+            confidenceFill.style.width = '0%';
+            spectrogram.innerHTML = '';
+        }
+    </script>
+</body>
+</html>

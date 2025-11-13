@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语音伪造检测系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .style-switch {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .style-switch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .upload-area {
+            border: 3px dashed #ddd;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: #fafafa;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .upload-text {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .upload-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .result-area {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .result-real {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .result-fake {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        .result-error {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+        }
+
+        .result-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .result-details {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        .confidence-bar {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            height: 20px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .spectrogram {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .spectrogram img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .file-info {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .supported-formats {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .upload-area {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/apple" class="style-switch">Apple风格</a>
+            <h1>🎵 语音伪造检测系统</h1>
+            <p>上传音频文件，AI智能识别是否为伪造语音</p>
+            <p>支持格式：WAV、MP3、M4A、FLAC</p>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">🎤</div>
+            <div class="upload-text">点击选择音频文件或拖拽到此处</div>
+            <input type="file" id="fileInput" class="file-input" accept=".wav,.mp3,.m4a,.flac">
+            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                选择文件
+            </button>
+        </div>
+
+        <div class="file-info" id="fileInfo" style="display: none;">
+            <div id="fileName"></div>
+            <div id="fileSize"></div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <div>正在分析音频，请稍候...</div>
+        </div>
+
+        <div class="result-area" id="resultArea">
+            <div class="result-title" id="resultTitle"></div>
+            <div class="result-details" id="resultDetails"></div>
+            <div class="confidence-bar">
+                <div class="confidence-fill" id="confidenceFill"></div>
+            </div>
+            <div class="spectrogram" id="spectrogram"></div>
+        </div>
+
+        <div class="supported-formats">
+            <strong>支持的音频格式：</strong>WAV, MP3, M4A, FLAC<br>
+            <strong>文件大小限制：</strong>16MB以内
+        </div>
+
+        <div class="footer">
+            <p>🔬 基于机器学习的语音伪造检测技术</p>
+            <p>使用MFCC特征和多种机器学习算法进行智能识别</p>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const loading = document.getElementById('loading');
+        const resultArea = document.getElementById('resultArea');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultDetails = document.getElementById('resultDetails');
+        const confidenceFill = document.getElementById('confidenceFill');
+        const spectrogram = document.getElementById('spectrogram');
+
+        // 文件拖拽功能
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        // 文件选择
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            // 检查文件类型
+            const allowedTypes = ['audio/wav', 'audio/mpeg', 'audio/mp4', 'audio/flac'];
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+            const allowedExtensions = ['wav', 'mp3', 'm4a', 'flac'];
+            
+            if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension)) {
+                alert('不支持的文件格式！请选择WAV、MP3、M4A或FLAC文件。');
+                return;
+            }
+
+            // 检查文件大小
+            if (file.size > 16 * 1024 * 1024) {
+                alert('文件过大！请选择小于16MB的文件。');
+                return;
+            }
+
+            // 显示文件信息
+            document.getElementById('fileName').textContent = `文件名: ${file.name}`;
+            document.getElementById('fileSize').textContent = `文件大小: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+            fileInfo.style.display = 'block';
+
+            // 上传文件
+            uploadFile(file);
+        }
+
+        function uploadFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // 显示加载状态
+            loading.style.display = 'block';
+            resultArea.style.display = 'none';
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+                
+                if (data.success) {
+                    displayResult(data.result, data.spectrogram);
+                } else {
+                    displayError(data.error);
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                displayError('上传失败: ' + error.message);
+            });
+        }
+
+        function displayResult(result, spectrogramData) {
+            resultArea.style.display = 'block';
+            
+            if (result.error) {
+                displayError(result.error);
+                return;
+            }
+
+            const isFake = result.is_fake;
+            const confidence = result.confidence;
+            const probReal = result.real_probability;
+            const probFake = result.fake_probability;
+
+            // 设置结果样式
+            resultArea.className = 'result-area ' + (isFake ? 'result-fake' : 'result-real');
+            
+            // 设置结果文本
+            resultTitle.textContent = isFake ? '🚨 检测到伪造语音' : '✅ 真实语音';
+            resultDetails.innerHTML = `
+                <!--<div>置信度: ${(confidence * 100).toFixed(1)}%</div>-->
+                <div>真实概率: ${(probReal * 100).toFixed(1)}%</div>
+                <div>伪造概率: ${(probFake * 100).toFixed(1)}%</div>
+            `;
+
+            // 设置置信度条
+            confidenceFill.style.width = (confidence * 100) + '%';
+
+            // 显示频谱图
+            if (spectrogramData) {
+                spectrogram.innerHTML = `
+                    <h3>音频频谱分析</h3>
+                    <img src="data:image/png;base64,${spectrogramData}" alt="频谱图">
+                `;
+            }
+        }
+
+        function displayError(error) {
+            resultArea.style.display = 'block';
+            resultArea.className = 'result-area result-error';
+            resultTitle.textContent = '❌ 检测失败';
+            resultDetails.textContent = error;
+            confidenceFill.style.width = '0%';
+            spectrogram.innerHTML = '';
+        }
+    </script>
+</body>
+</html>
