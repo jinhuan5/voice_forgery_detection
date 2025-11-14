@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Voice Forger — 官方首页</title>
+    <!-- 注意：保持你原来的 style.css 不要改 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOP NAV (保持不变) -->
+<header class="apple-nav">
+    <div class="nav-inner">
+        <div class="nav-logo">VF</div>
+        <nav>
+            <a href="#hero-light">首页</a>
+            <a href="#hero-dark">演示</a>
+            <a href="#grid-section">功能</a>
+            <a href="#tech">技术</a>
+            <a href="#demo">Demo / 部署</a>
+            <a href="#about">关于</a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO 1 - LIGHT (原样) -->
+<section id="hero-light" class="hero-light" aria-label="主视觉(浅)">
+    <h1>让语音，更安全。</h1>
+    <p class="sub">Voice Forgery Detection — 专业的深度伪造语音检测系统。</p>
+    <div class="buttons">
+        <a class="btn-primary" href="#grid-section">了解更多</a>
+        <a class="btn-secondary" href="https://github.com/jinhuan5/voice_forgery_detection.git" target="_blank">Github</a>
+    </div>
+</section>
+
+<!-- HERO 2 - DARK PRODUCT (原样) -->
+<section id="hero-dark" class="hero-dark" aria-label="产品展示(暗)">
+    <h2>Voice Detect Pro</h2>
+    <p class="sub">All out Detection. Ultra Accuracy.</p>
+
+    <div class="buttons">
+        <a class="btn-primary" href="#demo">进入演示</a>
+        <a class="btn-secondary" href="#download">下载</a>
+    </div>
+
+    <div class="hero-img" role="img" aria-label="产品渲染图"></div>
+</section>
+<!-- GRID SECTION (2 x 3 Apple-style cards) -->
+<section id="grid-section" class="grid-section">
+
+    <!-- Card 1: Voice Forgery Detection -->
+    <div class="grid-card light">
+        <h3>Voice Forgery Detection</h3>
+        <p class="sub">实时/批量音频检测，支持多种采样率与格式；提供检测置信度与可视化频谱对比。</p>
+        <p style="margin-top:8px; color:rgba(0,0,0,0.6); font-size:12px;">频谱特征 · MFCC · 时频域分析 · XGBoost/LightGBM/NN</p>
+        <div class="buttons">
+            <a class="btn-primary" href="javascript:void(0)" onclick="document.getElementById('card1File').click()">开始检测</a>
+            <a class="btn-secondary" href="https://github.com/jinhuan5/voice_forgery_detection.git" target="_blank">查看代码</a>
+        </div>
+        <div class="card-img img1"></div>
+    </div>
+
+    <!-- Card 2: Audio Analyzer -->
+    <div class="grid-card blue">
+        <h3>Audio Analyzer Pro</h3>
+        <p class="sub">频谱、声谱图、对比标注与决策可视化，帮助研究者快速定位判别特征。</p>
+        <p style="margin-top:8px; color:rgba(0,0,0,0.6); font-size:12px;">交互式频谱 · 阈值可调 · 导出图片与报告</p>
+        <div class="buttons">
+            <a class="btn-primary" href="#">开始分析</a>
+            <a class="btn-secondary" href="#">了解更多</a>
+        </div>
+        <div class="card-img img2"></div>
+    </div>
+
+    <!-- Card 3: Real-time Detection -->
+    <div class="grid-card light">
+        <h3>实时伪造检测</h3>
+        <p class="sub">提供数据预处理、数据增强、训练脚本与评估报告，支持交叉验证与混淆矩阵导出。</p>
+        <p style="margin-top:8px; color:rgba(0,0,0,0.6); font-size:12px;">可复现训练流程 · 模型持久化(.pkl) · scaler管理</p>
+        <div class="buttons">
+            <a class="btn-primary" href="#">立即体验</a>
+        </div>
+        <div class="card-img img3"></div>
+    </div>
+
+    <!-- Card 4: Dataset Tools -->
+    <div class="grid-card white">
+        <h3>数据集清洗工具</h3>
+        <p class="sub">自动过滤噪声、剪切、标注深度伪造音频。</p>
+        <div class="buttons">
+            <a class="btn-primary" href="https://github.com/jinhuan5/voice_forgery_detection.git" target="_blank">打开工具</a>
+            <a class="btn-secondary" href="https://github.com/jinhuan5/voice_forgery_detection.git" target="_blank">查看文档</a>
+        </div>
+        <div class="card-img img4"></div>
+    </div>
+
+    <!-- Card 5: Model Training -->
+    <div class="grid-card light">
+        <h3>模型训练平台</h3>
+        <p class="sub">可视化训练曲线，多模型对比实验。</p>
+        <div class="buttons">
+            <a class="btn-primary" href="#">开始训练</a>
+        </div>
+        <div class="card-img img5"></div>
+    </div>
+
+    <!-- Card 6: API Service -->
+    <div class="grid-card white">
+        <h3>API 接口服务</h3>
+        <p class="sub">一行代码接入语音伪造检测能力。</p>
+        <div class="buttons">
+            <a class="btn-primary" href="#">查看 API</a>
+            <a class="btn-secondary" href="#">申请 Key</a>
+        </div>
+        <div class="card-img img6"></div>
+    </div>
+
+</section>
+
+<!-- SECTION 4: TECHNOLOGY / SPECS -->
+<section id="tech" style="background:#f9fafb; padding:100px 20px;">
+    <div style="max-width:1100px; margin:0 auto;">
+        <h2 style="font-size:42px; margin-bottom:18px">技术亮点</h2>
+        <p style="font-size:18px; color:rgba(0,0,0,0.7); margin-bottom:28px">集成音频信号处理与机器学习，面向研究与产品化部署。</p>
+
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;">
+            <div class="card" style="padding:20px;">
+                <div style="font-weight:600; font-size:18px">高精度分类</div>
+                <div style="color:rgba(0,0,0,0.6); margin-top:8px">结合频谱特征与模型融合提升检测准确率与泛化。</div>
+            </div>
+
+            <div class="card" style="padding:20px;">
+                <div style="font-weight:600; font-size:18px">实时性能</div>
+                <div style="color:rgba(0,0,0,0.6); margin-top:8px">支持流式输入与低延迟推理（可用于实时监测与报警）。</div>
+            </div>
+
+            <div class="card" style="padding:20px;">
+                <div style="font-weight:600; font-size:18px">易于集成</div>
+                <div style="color:rgba(0,0,0,0.6); margin-top:8px">提供 REST API / Flask Demo / 可打包的模型文件 (.pkl/.joblib)。</div>
+            </div>
+        </div>
+
+        <!-- small spec table -->
+        <div style="margin-top:34px; display:flex; gap:18px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:260px; background:white; padding:18px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+                <div style="font-weight:600; margin-bottom:10px">输入格式</div>
+                <ul style="color:rgba(0,0,0,0.7); margin:0 0 0 18px;">
+                    <li>WAV / MP3 / FLAC 支持</li>
+                    <li>采样率：8kHz - 48kHz</li>
+                    <li>单声道 / 立体声</li>
+                </ul>
+            </div>
+
+            <div style="flex:1; min-width:260px; background:white; padding:18px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+                <div style="font-weight:600; margin-bottom:10px">模型与依赖</div>
+                <ul style="color:rgba(0,0,0,0.7); margin:0 0 0 18px;">
+                    <li>常用模型：XGBoost / LightGBM / CNN</li>
+                    <li>依赖：numpy, scipy, librosa, scikit-learn, flask</li>
+                    <li>部署：Docker / Heroku / Vercel (前端)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 5: DEMO & DEPLOY -->
+<section id="demo" style="padding:100px 20px;">
+    <div style="max-width:1100px; margin:0 auto;">
+        <h2 style="font-size:42px; margin-bottom:8px">在线 Demo 与快速部署</h2>
+        <p style="color:rgba(0,0,0,0.7); margin-bottom:20px">快速体验或将项目部署到你的服务器 / 本地环境。</p>
+
+        <div style="display:flex; gap:18px; flex-wrap:wrap;">
+            <!-- Voice Detection Demo Card -->
+            <div style="flex:2; min-width:400px; background:white; padding:20px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.06);">
+                <div style="font-weight:600; margin-bottom:8px">语音伪造检测演示</div>
+                <p style="color:rgba(0,0,0,0.6); margin-bottom:16px">上传音频文件，体验AI驱动的语音伪造检测技术</p>
+
+                <!-- 文件上传区域 -->
+                <div style="border:2px dashed #0071e3; border-radius:8px; padding:20px; text-align:center; margin-bottom:16px; cursor:pointer;" onclick="document.getElementById('audioFile').click()">
+                    <div style="color:#0071e3; font-size:14px; margin-bottom:8px;">📁 点击或拖拽上传音频文件</div>
+                    <div style="color:rgba(0,0,0,0.5); font-size:12px;">支持 WAV, MP3, M4A, FLAC, OGG 格式</div>
+                    <input type="file" id="audioFile" accept=".wav,.mp3,.m4a,.flac,.ogg" style="display:none" onchange="handleFileSelect(this)">
+                </div>
+
+                <!-- 上传状态 -->
+                <div id="uploadStatus" style="display:none; margin-bottom:16px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <div id="statusIcon"></div>
+                        <div id="statusText"></div>
+                    </div>
+                </div>
+
+                <!-- 检测结果 -->
+                <div id="detectionResult" style="display:none; background:#f5f5f7; border-radius:8px; padding:16px; margin-bottom:16px;">
+                    <div style="font-weight:600; margin-bottom:8px;">检测结果</div>
+                    <div id="resultContent"></div>
+                </div>
+
+                <!-- 频谱图 -->
+                <div id="spectrogramContainer" style="display:none; margin-bottom:16px;">
+                    <div style="font-weight:600; margin-bottom:8px;">音频分析图表</div>
+                    <div id="spectrogramImages" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;"></div>
+                </div>
+
+                <div style="margin-top:12px;">
+                    <button id="detectButton" class="btn-primary" style="display:none;" onclick="detectAudio()">开始检测</button>
+                    <button id="resetButton" class="btn-secondary" style="display:none; margin-left:8px;" onclick="resetDemo()">重新上传</button>
+                </div>
+            </div>
+            <div style="flex:1; min-width:280px; max-width:400px; background:white; padding:20px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.06); word-wrap:break-word;">
+                <div style="font-weight:600; margin-bottom:8px">三步快速部署</div>
+                <ol style="color:rgba(0,0,0,0.7); margin-left:18px; font-size:14px; line-height:1.5;">
+                    <li style="margin-bottom:8px;">克隆仓库：<br/><code style="font-size:12px; padding:2px 4px; background:#f5f5f7; border-radius:3px; word-break:break-all;">git clone https://github.com/jinhuan5/voice_forgery_detection.git</code></li>
+                    <li style="margin-bottom:8px;">安装依赖：<br/><code style="font-size:12px; padding:2px 4px; background:#f5f5f7; border-radius:3px;">pip install -r requirements.txt</code></li>
+                    <li>运行服务：<br/><code style="font-size:12px; padding:2px 4px; background:#f5f5f7; border-radius:3px;">python run_project.py</code></li>
+                </ol>
+                <div style="margin-top:12px;">
+                    <a class="btn-primary" href="https://github.com/jinhuan5/voice_forgery_detection.git" target="_blank">查看部署指南</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for Voice Detection -->
+<script>
+let selectedFile = null;
+let card1File = null;
+let card2File = null;
+let card3File = null;
+
+// 卡片1功能 - Voice Forgery Detection
+function handleCard1Upload(input) {
+    const file = input.files[0];
+    if (file) {
+        card1File = file;
+
+        // 显示上传状态
+        const uploadZone = input.parentElement;
+        uploadZone.innerHTML = `
+            <div style="color: #28a745; font-size: 14px; margin-bottom: 4px;">✅ ${file.name}</div>
+            <div style="color: rgba(0,0,0,0.5); font-size: 12px;">点击重新选择文件</div>
+        `;
+        uploadZone.onclick = () => document.getElementById('card1File').click();
+
+        // 显示检测按钮
+        document.getElementById('card1DetectBtn').style.display = 'block';
+        document.getElementById('card1Result').style.display = 'none';
+    }
+}
+
+function detectCard1() {
+    if (!card1File) return;
+
+    const detectBtn = document.getElementById('card1DetectBtn');
+    const resultDiv = document.getElementById('card1Result');
+    const contentDiv = document.getElementById('card1ResultContent');
+
+    detectBtn.disabled = true;
+    detectBtn.textContent = '检测中...';
+
+    const formData = new FormData();
+    formData.append('file', card1File);
+
+    fetch('http://localhost:5000/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log('响应状态:', response.status, response.statusText);
+        console.log('响应头:', response.headers.get('content-type'));
+
+        if (!response.ok) {
+            throw new Error(`HTTP错误! 状态: ${response.status}`);
+        }
+
+        // 检查响应内容类型
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            console.warn('响应不是JSON格式，内容类型:', contentType);
+            throw new Error('响应格式错误：不是JSON格式');
+        }
+
+        return response.json().catch(parseError => {
+            console.error('JSON解析失败:', parseError);
+            console.log('响应文本:', response.text ? response.text() : '无法获取响应文本');
+            throw new Error(`JSON解析失败: ${parseError.message}`);
+        });
+    })
+    .then(data => {
+        console.log('检测响应数据:', data); // 添加调试日志
+        console.log('data.success:', data.success);
+        console.log('data.result:', data.result);
+
+        // 更详细的检查
+        if (data && data.success === true) {
+            console.log('检测成功，显示结果');
+            if (data.result) {
+                showCard1Result(data);
+            } else {
+                console.log('结果数据缺失');
+                contentDiv.innerHTML = `
+                    <div style="color:#dc3545;">❌ 结果数据缺失</div>
+                    <div style="color:rgba(0,0,0,0.6); margin-top:4px; font-size:12px;">检测成功但结果数据不完整</div>
+                `;
+            }
+        } else {
+            console.log('检测失败:', data.error);
+            contentDiv.innerHTML = `
+                <div style="color:#dc3545;">❌ 检测失败</div>
+                <div style="color:rgba(0,0,0,0.6); margin-top:4px; font-size:12px;">${data.error || '未知错误'}</div>
+            `;
+        }
+        resultDiv.style.display = 'block';
+    })
+    .catch(error => {
+        console.error('检测失败:', error);
+        console.error('错误类型:', error.name);
+        console.error('错误信息:', error.message);
+        console.error('错误堆栈:', error.stack);
+
+        let errorMessage = '未知错误';
+        if (error.message) {
+            errorMessage = error.message;
+        } else if (error.name === 'TypeError') {
+            errorMessage = '网络连接错误';
+        }
+
+        contentDiv.innerHTML = `
+            <div style="color:#dc3545;">❌ 检测失败</div>
+            <div style="color:rgba(0,0,0,0.6); margin-top:4px; font-size:12px;">${errorMessage}</div>
+        `;
+        resultDiv.style.display = 'block';
+    })
+    .finally(() => {
+        detectBtn.disabled = false;
+        detectBtn.textContent = '开始检测';
+    });
+}
+
+function showCard1Result(data) {
+    const contentDiv = document.getElementById('card1ResultContent');
+
+    let resultHTML = '';
+    if (data.result.is_fake === false || data.result.is_fake === 0) {
+        resultHTML = `
+            <div style="color:#28a745; font-weight:600;">✅ 真实语音</div>
+            <div style="color:rgba(0,0,0,0.6); margin-top:4px; font-size:12px;">真实度: ${(data.result.real_probability * 100).toFixed(1)}%</div>
+        `;
+    } else {
+        resultHTML = `
+            <div style="color:#dc3545; font-weight:600;">⚠️ 伪造语音</div>
+            <div style="color:rgba(0,0,0,0.6); margin-top:4px; font-size:12px;">伪造度: ${(data.result.fake_probability * 100).toFixed(1)}%</div>
+        `;
+    }
+
+    contentDiv.innerHTML = resultHTML;
+}
+
+function handleFileSelect(input) {
+    const file = input.files[0];
+    if (file) {
+        selectedFile = file;
+        showUploadStatus('正在上传文件...', '⏳');
+
+        // 模拟上传延迟
+        setTimeout(() => {
+            showUploadStatus('文件上传成功！', '✅');
+            document.getElementById('detectButton').style.display = 'inline-block';
+            document.getElementById('resetButton').style.display = 'inline-block';
+        }, 1000);
+    }
+}
+
+function showUploadStatus(message, icon) {
+    document.getElementById('uploadStatus').style.display = 'block';
+    document.getElementById('statusIcon').textContent = icon;
+    document.getElementById('statusText').textContent = message;
+}
+
+function detectAudio() {
+    if (!selectedFile) return;
+
+    showUploadStatus('正在检测音频...', '🔍');
+    document.getElementById('detectButton').disabled = true;
+
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+
+    fetch('http://localhost:5000/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showResult(data);
+            showUploadStatus('检测完成！', '✅');
+        } else {
+            showUploadStatus('检测失败：' + (data.error || '未知错误'), '❌');
+            showErrorResult();
+        }
+    })
+    .catch(error => {
+        console.error('检测失败:', error);
+        showUploadStatus('检测失败，请重试', '❌');
+        showErrorResult();
+    })
+    .finally(() => {
+        document.getElementById('detectButton').disabled = false;
+    });
+}
+
+function showResult(data) {
+    const resultDiv = document.getElementById('detectionResult');
+    const contentDiv = document.getElementById('resultContent');
+
+    let resultHTML = '';
+    let statusColor = '';
+    let statusIcon = '';
+
+    // 根据is_fake字段判断，而不是prediction
+    if (data.result.is_fake === false || data.result.is_fake === 0) {
+        // 真实语音
+        statusColor = '#28a745';
+        statusIcon = '✅';
+        resultHTML = `
+            <div style="color:${statusColor}; font-weight:600;">${statusIcon} 真实语音</div>
+            <div style="color:rgba(0,0,0,0.6); margin-top:4px;">真实度: ${(data.result.real_probability * 100).toFixed(1)}%</div>
+            <div style="color:rgba(0,0,0,0.6); font-size:12px; margin-top:2px;">伪造度: ${(data.result.fake_probability * 100).toFixed(1)}%</div>
+        `;
+    } else {
+        // 伪造语音
+        statusColor = '#dc3545';
+        statusIcon = '⚠️';
+        resultHTML = `
+            <div style="color:${statusColor}; font-weight:600;">${statusIcon} 伪造语音</div>
+            <div style="color:rgba(0,0,0,0.6); margin-top:4px;">伪造度: ${(data.result.fake_probability * 100).toFixed(1)}%</div>
+            <div style="color:rgba(0,0,0,0.6); font-size:12px; margin-top:2px;">真实度: ${(data.result.real_probability * 100).toFixed(1)}%</div>
+        `;
+    }
+
+    contentDiv.innerHTML = resultHTML;
+    resultDiv.style.display = 'block';
+
+    // 显示频谱图
+    if (data.spectrogram) {
+        showSpectrogram(data.spectrogram);
+    }
+}
+
+function showErrorResult() {
+    const resultDiv = document.getElementById('detectionResult');
+    const contentDiv = document.getElementById('resultContent');
+
+    contentDiv.innerHTML = `
+        <div style="color:#dc3545;">❌ 检测失败</div>
+        <div style="color:rgba(0,0,0,0.6); margin-top:4px;">请检查网络连接或稍后重试</div>
+    `;
+    resultDiv.style.display = 'block';
+}
+
+function showSpectrogram(spectrogram) {
+    const container = document.getElementById('spectrogramContainer');
+    const imagesDiv = document.getElementById('spectrogramImages');
+
+    imagesDiv.innerHTML = '';
+
+    // 显示频谱图
+    if (spectrogram) {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <div style="text-align:center;">
+                <div style="font-size:12px; color:rgba(0,0,0,0.6); margin-bottom:4px;">音频频谱分析</div>
+                <img src="data:image/png;base64,${spectrogram}" style="width:100%; max-width:400px; border-radius:4px;"/>
+            </div>
+        `;
+        imagesDiv.appendChild(div);
+    }
+
+    container.style.display = 'block';
+}
+
+function resetDemo() {
+    selectedFile = null;
+    document.getElementById('audioFile').value = '';
+    document.getElementById('uploadStatus').style.display = 'none';
+    document.getElementById('detectionResult').style.display = 'none';
+    document.getElementById('spectrogramContainer').style.display = 'none';
+    document.getElementById('detectButton').style.display = 'none';
+    document.getElementById('resetButton').style.display = 'none';
+}
+
+// 拖拽上传功能
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadArea = document.querySelector('[onclick="document.getElementById(\'audioFile\').click()"]');
+
+    uploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#0051a2';
+        this.style.backgroundColor = '#f0f7ff';
+    });
+
+    uploadArea.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#0071e3';
+        this.style.backgroundColor = 'transparent';
+    });
+
+    uploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#0071e3';
+        this.style.backgroundColor = 'transparent';
+
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            const file = files[0];
+            const allowedTypes = ['.wav', '.mp3', '.m4a', '.flac', '.ogg'];
+            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+
+            if (allowedTypes.includes(fileExtension)) {
+                selectedFile = file;
+                showUploadStatus('正在上传文件...', '⏳');
+
+                setTimeout(() => {
+                    showUploadStatus('文件上传成功！', '✅');
+                    document.getElementById('detectButton').style.display = 'inline-block';
+                    document.getElementById('resetButton').style.display = 'inline-block';
+                }, 1000);
+            } else {
+                showUploadStatus('不支持的文件格式', '❌');
+            }
+        }
+    });
+});
+</script>
+
+<!-- SECTION 6: ABOUT / CONTACT -->
+<section id="about" style="background:#f5f5f7; padding:80px 20px;">
+    <div style="max-width:1100px; margin:0 auto; display:flex; gap:24px; flex-wrap:wrap; align-items:center;">
+        <div style="flex:1; min-width:320px;">
+            <h2 style="font-size:36px; margin-bottom:10px">关于 & 联系</h2>
+            <p style="color:rgba(0,0,0,0.7); margin-bottom:16px">我是信息安全/语音处理研究者（或学生），欢迎合作、问题反馈与学术交流。</p>
+            <p style="color:rgba(0,0,0,0.7); margin-bottom:16px"><strong>Email：</strong> youremail@example.com</p>
+            <div style="display:flex; gap:10px;">
+                <a class="btn-primary" href="mailto:youremail@example.com">发送邮件</a>
+                <a class="btn-secondary" href="https://github.com/jinhuan5" target="_blank">GitHub</a>
+            </div>
+        </div>
+
+        <div style="width:320px; min-width:260px;">
+            <div style="background:white; padding:18px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.06);">
+                <div style="font-weight:600; margin-bottom:8px">项目快览</div>
+                <div style="color:rgba(0,0,0,0.7);">
+                    <div>⭐ Stars: —</div>
+                    <div>🍴 Forks: —</div>
+                    <div>🔄 最近提交: —</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER (保留/轻微调整内容) -->
+<footer style="background:transparent; padding:36px 20px;">
+    <div style="max-width:1100px; margin:0 auto; color:rgba(0,0,0,0.6); text-align:center;">
+        © <span id="year"></span> Voice Forger. 版权所有。
+    </div>
+</footer>
+
+<script>
+    // 保持最少 JS：年、滚动到锚点平滑
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // 平滑滚动（现代浏览器）
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+            const t = document.querySelector(this.getAttribute('href'));
+            if(t){
+                e.preventDefault();
+                t.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

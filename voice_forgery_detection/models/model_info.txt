@@ -1,4 +1,0 @@
-model_name: SVC
-best_score: 1.0
-training_time: 2025-11-13 21:22:21
-feature_count: Clean data features

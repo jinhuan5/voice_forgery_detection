@@ -181,7 +181,6 @@ python app.py
 
 如有问题或建议，请通过以下方式联系：
 - 项目Issues：在GitHub仓库提交问题
-- 邮箱:jinhuanhaha@gmail.com
 - 技术讨论：欢迎提交Pull Request
 
 ## 📄 许可证

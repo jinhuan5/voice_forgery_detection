@@ -1,5 +1,0 @@
-- Use Simplified Chinese forever to reply
-- The operating system is win11 and the shell environment is powershell.
-- All front-end projects use pnpm for package management
-- In case you need to search the web or are unsure about some code framework, use the exa mcp service to get the latest information.
-- When requirements are encountered, use the sub-agent role for requirements analysis and disassembly, and use the sub-agent role for development, and finally merge the code into the main agent role.
